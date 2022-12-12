@@ -2,6 +2,7 @@ with open('input.txt','r') as file:
     lines = file.readlines()
 
     contained_sets = 0
+    overlapping_sets = 0
 
     for line in lines:
 
@@ -24,9 +25,16 @@ with open('input.txt','r') as file:
             if e2_min >= e1_min and e2_max <= e1_max:
                 contained_sets += 1
                 # print(e1, e2)
-        
+
+            if e1_min >= e2_min or e1_max <= e2_max:
+                overlapping_sets += 1
+            if e1_min >= e2_min or e1_max <= e2_max:
+                overlapping_sets += 1
+
         # only add 1 for case where identical
         else:
             contained_sets += 1
+            # overlapping_sets += 1
 
     print(contained_sets)
+    print(overlapping_sets)
