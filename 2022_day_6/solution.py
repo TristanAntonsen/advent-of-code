@@ -3,14 +3,16 @@ with open('input.txt','r') as file:
     input = file.read()
     file.close()
 
-def first_four(str):
+def first_four(str, unique_count):
 
     for i in range(3,len(str)):
-        four = str[i - 3] + str[i - 2] + str[i - 1] + str[i]
-        if len(set(four)) == 4:
-            return i + 1
 
+        buff = str[i-unique_count:i]
 
-index = first_four(input)
-print(input[index-4:index])
+        if len(set(buff)) == unique_count:
+            return i
+
+unique = 14
+index = first_four(input, unique)
+print(input[index-unique:index])
 print(index)
