@@ -17,34 +17,39 @@ y = 3
 
 GRID_SIZE = 99
 #returns array of trees between search tree & specified edge
-def array_to_edge(x, y, direction):
+def array_to_edge(current_tree, x, y, direction):
     row = []
+    score = 0
     if direction == "right":
         for i in range(x+1,GRID_SIZE):
-            row.append(trees[y][i])
-            # trees[y][i] = BLOCK
-            # is_visible[y][i] = 1
+            tree = trees[y][i]
+            row.append(tree)
+            if tree >= current_tree:
+                break
     elif direction == "left":
         for i in range(0,x):
-            row.append(trees[y][i])
-            # trees[y][i] = BLOCK
-            # is_visible[y][i] = 1
+            tree = trees[y][i]
+            row.append(tree)
+            if tree >= current_tree:
+                break
     elif direction == "top":
         for j in range(0,y):
-            row.append(trees[j][x])
-            # trees[j][x] = BLOCK
-            # is_visible[j][x] = 1
+            tree = trees[j][x]
+            row.append(tree)
+            if tree >= current_tree:
+                break
     elif direction == "bottom":
         for j in range(y+1,GRID_SIZE):
-            row.append(trees[j][x])
-            # trees[j][x] = BLOCK
-            # is_visible[j][x] = 1
-
+            tree = trees[j][x]
+            row.append(tree)
+            if tree >= current_tree:
+                break
     else:
         print("Invalid direction")
-    return row
+
+    # len(row = score)
+    return row, len(row)
     
-row = array_to_edge(x,y,"top")
 
 ## Visibility loop
 visible_count = 0
@@ -54,7 +59,7 @@ for x in range(0,GRID_SIZE):
         dirs = ["right","left","top","bottom"]
         visibility = []
         for dir in dirs:
-            arr = array_to_edge(x, y, dir)
+            arr, score = array_to_edge(current_tree, x, y, dir)
             v = True
             for t in arr:
                 v = v and (int(current_tree) > int(t))
