@@ -51,32 +51,16 @@ visible_count = 0
 for x in range(0,GRID_SIZE):
     for y in range(0,GRID_SIZE):
         current_tree = trees[y][x]
-        # right
-        right = array_to_edge(x, y, "right")
-        v_r = True
-        for t in right:
-            v_r = v_r and (int(current_tree) > int(t))
+        dirs = ["right","left","top","bottom"]
+        visibility = []
+        for dir in dirs:
+            arr = array_to_edge(x, y, dir)
+            v = True
+            for t in arr:
+                v = v and (int(current_tree) > int(t))
+            visibility.append(v)
 
-        # left
-        left = array_to_edge(x, y, "left")
-        v_l = True
-        for t in left:
-            v_l = v_l and (int(current_tree) > int(t))
-
-        # top
-        top = array_to_edge(x, y, "top")
-        v_t = True
-        for t in top:
-            v_t = v_t and (int(current_tree) > int(t))
-
-        # bottom
-        bottom = array_to_edge(x, y, "bottom")
-        v_b = True
-        for t in bottom:
-            v_b = v_b and (int(current_tree) > int(t))
-
-        
-        if v_r or v_l or v_t or v_b:
+        if True in visibility:
             is_visible[y][x] = 1
             visible_count += 1
 
