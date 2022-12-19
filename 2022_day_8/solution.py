@@ -1,7 +1,7 @@
 import numpy as np
 from termcolor import colored
 tree_list = []
-with open("demo.txt","r") as file:
+with open("input.txt","r") as file:
     lines = file.readlines()
     for line in lines:
         tree_list.append([l for l in line.strip()])
@@ -15,7 +15,7 @@ BLOCK = '\u2588'
 x = 1
 y = 3
 
-GRID_SIZE = 5
+GRID_SIZE = 99
 #returns array of trees between search tree & specified edge
 def array_to_edge(x, y, direction):
     row = []
@@ -83,7 +83,7 @@ for x in range(0,GRID_SIZE):
 # visualizing
 for x in range(0,GRID_SIZE):
     row = trees[x]
-    print(" ".join(row))
+    print("".join(row))
 
 print("-----")
 
