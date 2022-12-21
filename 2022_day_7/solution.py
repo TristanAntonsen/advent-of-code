@@ -27,10 +27,17 @@ for i in range(len(lines)):
             else:
                 target_directory = last_directory
                 last_directory = current_directory
+
             current_directory = target_directory
-            print("last:",last_directory,"current:", current_directory, current_line)
         else:
             continue
+
+        if current_directory in directories.keys():
+            directories[current_directory] = {
+                "parent" : last_directory
+            }
+            
+    print("last:",last_directory,"current:", current_directory, current_line)
 
 
 
